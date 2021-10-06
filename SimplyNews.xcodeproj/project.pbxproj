@@ -16,6 +16,7 @@
 		015C4B84270CEA74001A9D1B /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015C4B83270CEA74001A9D1B /* NewsCell.swift */; };
 		015C4B87270D1382001A9D1B /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015C4B86270D1382001A9D1B /* News.swift */; };
 		01B43A47270E39B6003CC4B8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B43A46270E39B6003CC4B8 /* Constants.swift */; };
+		01B43A49270E3CE9003CC4B8 /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B43A48270E3CE9003CC4B8 /* ArticleViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		015C4B83270CEA74001A9D1B /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
 		015C4B86270D1382001A9D1B /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
 		01B43A46270E39B6003CC4B8 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		01B43A48270E3CE9003CC4B8 /* ArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				015C4B86270D1382001A9D1B /* News.swift */,
 				015C4B83270CEA74001A9D1B /* NewsCell.swift */,
 				010F1CCD270B31C70089EF86 /* UIView+Extension.swift */,
+				01B43A48270E3CE9003CC4B8 /* ArticleViewController.swift */,
 				01207BD6270A6D5700E363F3 /* Info.plist */,
 			);
 			path = SimplyNews;
@@ -156,6 +159,7 @@
 			files = (
 				015C4B87270D1382001A9D1B /* News.swift in Sources */,
 				01207BCD270A6D5200E363F3 /* MainViewController.swift in Sources */,
+				01B43A49270E3CE9003CC4B8 /* ArticleViewController.swift in Sources */,
 				01207BC9270A6D5200E363F3 /* AppDelegate.swift in Sources */,
 				015C4B84270CEA74001A9D1B /* NewsCell.swift in Sources */,
 				01B43A47270E39B6003CC4B8 /* Constants.swift in Sources */,
