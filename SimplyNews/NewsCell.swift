@@ -13,6 +13,7 @@ class NewsCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 10
         imageView.clipsToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
@@ -21,12 +22,14 @@ class NewsCell: UITableViewCell {
         label.numberOfLines = 0
         label.adjustsFontSizeToFitWidth = true
         label.font = UIFont.preferredFont(forTextStyle: .title1)
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     lazy var timestampLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .caption1)
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -44,7 +47,7 @@ class NewsCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func set(newsItem: News) {
+   public func set(newsItem: News) {
         //TODO: Adjust to match info needed from API call
         newsImageView.image = newsItem.image
         headlineLabel.text = newsItem.headline
@@ -52,8 +55,6 @@ class NewsCell: UITableViewCell {
     }
     
     func setImageUI() {
-        newsImageView.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             newsImageView.topAnchor.constraint(equalTo: topAnchor, constant: 12),
             newsImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
@@ -63,8 +64,6 @@ class NewsCell: UITableViewCell {
     }
     
     func setHeadlineLabelUI() {
-        headlineLabel.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             headlineLabel.topAnchor.constraint(equalTo: topAnchor, constant: 12),
             headlineLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
@@ -74,8 +73,6 @@ class NewsCell: UITableViewCell {
     }
     
     func setTimestampLabelUI() {
-        timestampLabel.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             timestampLabel.topAnchor.constraint(equalTo: newsImageView.bottomAnchor, constant: 6),
             timestampLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
