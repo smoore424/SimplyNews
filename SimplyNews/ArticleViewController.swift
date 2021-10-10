@@ -11,50 +11,13 @@ class ArticleViewController: UIViewController {
     
     var article: News?
     
-    lazy var scrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        return scrollView
-    }()
-    
-    lazy var contentView: UIView = {
-        let contentView = UIView()
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        return contentView
-    }()
-    
-    lazy var newsImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-    
-    lazy var headlineLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    lazy var timeStampLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    lazy var sourceLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    lazy var contentLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    let scrollView = UIScrollView()
+    let contentView = UIView()
+    let newsImageView = SNNewsImageView(cornerRadius: 0)
+    let headlineLabel = SNHeadlineLabel(textAlignment: .left)
+    let timestampLabel = SNTimestampLabel(textAlignment: .left)
+    let sourceLabel = UILabel()
+    let contentLabel = SNContentLabel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,10 +25,9 @@ class ArticleViewController: UIViewController {
         view.backgroundColor = .systemBackground
         navigationItem.title = "Read Article"
         
-        
         newsImageView.image = UIImage(named: "dummy")
         headlineLabel.text = "TESTING! TESTING! TESTING! 123456 TESTING! TESTING! TESTING! 123456 TESTING! TESTING! TESTING! 123456"
-        timeStampLabel.text = article?.timeStamp
+        timestampLabel.text = article?.timeStamp
         sourceLabel.text = "Hellow, amm I here"
         contentLabel.text = """
         
@@ -83,23 +45,15 @@ class ArticleViewController: UIViewController {
         
         THE END
         """
-        
-        configureSubviews()
+
         setConstraints()
-    }
-    
-    private func configureSubviews() {
-        view.addSubview(scrollView)
-        scrollView.addSubview(contentView)
-        contentView.addSubview(newsImageView)
-        contentView.addSubview(headlineLabel)
-        contentView.addSubview(timeStampLabel)
-        contentView.addSubview(sourceLabel)
-        contentView.addSubview(contentLabel)
     }
     
     private func setConstraints() {
         //scrollView
+        view.addSubview(scrollView)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
           scrollView.topAnchor.constraint(equalTo: view.topAnchor),
           scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -109,6 +63,9 @@ class ArticleViewController: UIViewController {
         ])
 
         //contentView
+        scrollView.addSubview(contentView)
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
           contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
           contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
@@ -118,6 +75,8 @@ class ArticleViewController: UIViewController {
         ])
         
         //newsImageView
+        contentView.addSubview(newsImageView)
+        
         NSLayoutConstraint.activate([
             newsImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             newsImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
@@ -125,31 +84,40 @@ class ArticleViewController: UIViewController {
             newsImageView.widthAnchor.constraint(equalTo: newsImageView.heightAnchor, multiplier: 16/9)
         ])
         //headlineLabel
+        contentView.addSubview(headlineLabel)
+        
         NSLayoutConstraint.activate([
-            headlineLabel.topAnchor.constraint(equalTo: newsImageView.bottomAnchor, constant: 6),
-            headlineLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 6),
-            headlineLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -6),
+            headlineLabel.topAnchor.constraint(equalTo: newsImageView.bottomAnchor, constant: K.articlePadding),
+            headlineLabel.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: K.articlePadding),
+            headlineLabel.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -K.articlePadding),
         ])
         
         //timeStampLabel
+        contentView.addSubview(timestampLabel)
+        
         NSLayoutConstraint.activate([
-            timeStampLabel.topAnchor.constraint(equalTo: headlineLabel.bottomAnchor, constant: 6),
-            timeStampLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 6),
-            timeStampLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -6),
+            timestampLabel.topAnchor.constraint(equalTo: headlineLabel.bottomAnchor, constant: K.articlePadding),
+            timestampLabel.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: K.articlePadding),
+            timestampLabel.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -K.articlePadding),
         ])
         
         //sourceLabel
+        contentView.addSubview(sourceLabel)
+        
+        sourceLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            sourceLabel.topAnchor.constraint(equalTo: timeStampLabel.bottomAnchor, constant: 6),
-            sourceLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 6),
-            sourceLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -6),
+            sourceLabel.topAnchor.constraint(equalTo: timestampLabel.bottomAnchor, constant: K.articlePadding),
+            sourceLabel.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: K.articlePadding),
+            sourceLabel.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -K.articlePadding),
         ])
         
         //contentLabel
+        contentView.addSubview(contentLabel)
+        
         NSLayoutConstraint.activate([
-            contentLabel.topAnchor.constraint(equalTo: sourceLabel.bottomAnchor, constant: 6),
-            contentLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 6),
-            contentLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -6),
+            contentLabel.topAnchor.constraint(equalTo: sourceLabel.bottomAnchor, constant: K.articlePadding),
+            contentLabel.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: K.articlePadding),
+            contentLabel.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -K.articlePadding),
             contentLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
         

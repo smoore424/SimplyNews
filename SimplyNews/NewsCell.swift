@@ -9,38 +9,15 @@ import UIKit
 
 class NewsCell: UITableViewCell {
     
-    lazy var newsImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.layer.cornerRadius = 10
-        imageView.clipsToBounds = true
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-    
-    lazy var headlineLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.adjustsFontSizeToFitWidth = true
-        label.font = UIFont.preferredFont(forTextStyle: .title1)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    lazy var timestampLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.preferredFont(forTextStyle: .caption1)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    let newsImageView = SNNewsImageView(cornerRadius: 10)
+    let headlineLabel = SNHeadlineLabel(textAlignment: .left)
+    let timestampLabel = SNTimestampLabel(textAlignment: .left)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        addSubview(newsImageView)
-        addSubview(headlineLabel)
-        addSubview(timestampLabel)
-        setImageUI()
-        setHeadlineLabelUI()
-        setTimestampLabelUI()
+        configureNewsImageView()
+        configureHeadlineLabel()
+        configureTimestampLabel()
     }
     
     required init?(coder: NSCoder) {
@@ -54,30 +31,37 @@ class NewsCell: UITableViewCell {
         timestampLabel.text = newsItem.timeStamp
     }
     
-    func setImageUI() {
+    func configureNewsImageView() {
+        addSubview(newsImageView)
+        
         NSLayoutConstraint.activate([
-            newsImageView.topAnchor.constraint(equalTo: topAnchor, constant: 12),
-            newsImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
+            newsImageView.topAnchor.constraint(equalTo: topAnchor, constant: K.newsCellPadding),
+            newsImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -K.newsCellPadding),
             newsImageView.heightAnchor.constraint(equalToConstant: 92),
             newsImageView.widthAnchor.constraint(equalTo: newsImageView.heightAnchor, multiplier: 4/3)
         ])
     }
     
-    func setHeadlineLabelUI() {
+    func configureHeadlineLabel() {
+        addSubview(headlineLabel)
+        
         NSLayoutConstraint.activate([
-            headlineLabel.topAnchor.constraint(equalTo: topAnchor, constant: 12),
-            headlineLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
-            headlineLabel.trailingAnchor.constraint(equalTo: newsImageView.leadingAnchor, constant: -12),
+            headlineLabel.topAnchor.constraint(equalTo: topAnchor, constant: K.newsCellPadding),
+            headlineLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: K.newsCellPadding),
+            headlineLabel.trailingAnchor.constraint(equalTo: newsImageView.leadingAnchor, constant: -K.newsCellPadding),
             headlineLabel.heightAnchor.constraint(equalToConstant: 92)
         ])
     }
     
-    func setTimestampLabelUI() {
+    func configureTimestampLabel() {
+        addSubview(timestampLabel)
+        
         NSLayoutConstraint.activate([
             timestampLabel.topAnchor.constraint(equalTo: newsImageView.bottomAnchor, constant: 6),
-            timestampLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
-            timestampLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
+            timestampLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: K.newsCellPadding),
+            timestampLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -K.newsCellPadding),
             timestampLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -6)
         ])
     }
 }
+
