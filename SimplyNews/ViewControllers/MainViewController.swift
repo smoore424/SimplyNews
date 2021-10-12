@@ -27,6 +27,15 @@ class MainViewController: UIViewController {
         newsItems = dummyData()
         setNavigationUI()
         setTableViewUI()
+        
+        NetworkManager.shared.getTopUSNews { result in
+            switch result {
+            case .success(let response):
+                print(response)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }
 
