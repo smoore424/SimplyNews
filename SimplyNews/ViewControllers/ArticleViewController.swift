@@ -9,7 +9,7 @@ import UIKit
 
 class ArticleViewController: UIViewController {
     
-    var article: News?
+    var article: Article?
     
     let scrollView = UIScrollView()
     let contentView = UIView()
@@ -27,8 +27,8 @@ class ArticleViewController: UIViewController {
         
         newsImageView.image = UIImage(named: "dummy")
         headlineLabel.text = "TESTING! TESTING! TESTING! 123456 TESTING! TESTING! TESTING! 123456 TESTING! TESTING! TESTING! 123456"
-        timestampLabel.text = article?.timeStamp
-        sourceLabel.text = "Hellow, amm I here"
+//        timestampLabel.text = article?.timeStamp
+        sourceLabel.text = "Hello, am I here"
         contentLabel.text = """
         
         What is Lorem Ipsum?
@@ -87,7 +87,7 @@ class ArticleViewController: UIViewController {
         contentView.addSubview(headlineLabel)
         
         NSLayoutConstraint.activate([
-            headlineLabel.topAnchor.constraint(equalTo: newsImageView.bottomAnchor, constant: K.articlePadding),
+            headlineLabel.topAnchor.constraint(equalTo: newsImageView.bottomAnchor, constant: 12),
             headlineLabel.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: K.articlePadding),
             headlineLabel.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -K.articlePadding),
         ])
@@ -96,7 +96,7 @@ class ArticleViewController: UIViewController {
         contentView.addSubview(timestampLabel)
         
         NSLayoutConstraint.activate([
-            timestampLabel.topAnchor.constraint(equalTo: headlineLabel.bottomAnchor, constant: K.articlePadding),
+            timestampLabel.topAnchor.constraint(equalTo: headlineLabel.bottomAnchor, constant: 12),
             timestampLabel.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: K.articlePadding),
             timestampLabel.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -K.articlePadding),
         ])
@@ -106,7 +106,7 @@ class ArticleViewController: UIViewController {
         
         sourceLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            sourceLabel.topAnchor.constraint(equalTo: timestampLabel.bottomAnchor, constant: K.articlePadding),
+            sourceLabel.topAnchor.constraint(equalTo: timestampLabel.bottomAnchor, constant: 12),
             sourceLabel.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: K.articlePadding),
             sourceLabel.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -K.articlePadding),
         ])
@@ -115,7 +115,7 @@ class ArticleViewController: UIViewController {
         contentView.addSubview(contentLabel)
         
         NSLayoutConstraint.activate([
-            contentLabel.topAnchor.constraint(equalTo: sourceLabel.bottomAnchor, constant: K.articlePadding),
+            contentLabel.topAnchor.constraint(equalTo: sourceLabel.bottomAnchor, constant: 12),
             contentLabel.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: K.articlePadding),
             contentLabel.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -K.articlePadding),
             contentLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)

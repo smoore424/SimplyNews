@@ -9,14 +9,15 @@ import UIKit
 
 class MainViewController: UIViewController {
     
-    var newsItems: [News] = []
+    var newsItems: [Article] = []
 
     lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.tableFooterView = UIView()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = 140
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 600
         //register cell
         tableView.register(NewsCell.self, forCellReuseIdentifier: K.newsCell)
         return tableView
@@ -24,14 +25,24 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        newsItems = dummyData()
+//        newsItems = dummyData()
         setNavigationUI()
         setTableViewUI()
-        
-        NetworkManager.shared.getTopUSNews { result in
+        getNews()
+
+    }
+    
+    func getNews() {
+        NetworkManager.shared.getTopUSNews { [weak self] result in
+            guard let self = self else { return }
+            
             switch result {
             case .success(let response):
-                print(response)
+                self.newsItems = response.articles
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+                
             case .failure(let error):
                 print(error)
             }
@@ -76,14 +87,15 @@ extension MainViewController: UITableViewDelegate {
     }
 }
 
+
 //MARK: DUMMY DATA - DELETE ONCE READY TO MAKE NETWORK CALL
 extension MainViewController {
     func dummyData() -> [News]{
         let news1 = News(image: UIImage(named: "dummy")!, headline: "Testing - this is a test - 123456 hello!", timeStamp: "CNN • 4hrs ago • Mr. Rogers")
-        let news2 = News(image: UIImage(named: "dummy")!, headline: "Inside the fight over America's biggest and most extravagant new mansion", timeStamp: "Spokesman Review • 4hrs ago • Really Long Author Name")
+        let news2 = News(image: UIImage(named: "dummy")!, headline: "Inside the fight over America's biggest and most extravagant new mansion.", timeStamp: "Spokesman Review • 4hrs ago • Really Long Author Name")
         let news3 = News(image: UIImage(named: "dummy")!, headline: "Testing - this is a test", timeStamp: "4hrs ago • Mr. Rogers")
         let news4 = News(image: UIImage(named: "dummy")!, headline: "Testing - this is a test", timeStamp: "4hrs ago • Mr. Rogers")
-        let news5 = News(image: UIImage(named: "dummy")!, headline: "Testing - this is a test", timeStamp: "4hrs ago • Mr. Rogers")
+        let news5 = News(image: UIImage(named: "dummy")!, headline: "David Amess stabbing leaves U.K. lawmakers reeling from latest attack - NBC News", timeStamp: "4hrs ago • Mr. Rogers")
         let news6 = News(image: UIImage(named: "dummy")!, headline: "Testing - this is a test", timeStamp: "4hrs ago • Mr. Rogers")
         let news7 = News(image: UIImage(named: "dummy")!, headline: "Testing - this is a test", timeStamp: "4hrs ago • Mr. Rogers")
         let news8 = News(image: UIImage(named: "dummy")!, headline: "Testing - this is a test", timeStamp: "4hrs ago • Mr. Rogers")

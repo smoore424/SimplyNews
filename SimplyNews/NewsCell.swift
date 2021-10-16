@@ -15,20 +15,21 @@ class NewsCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        configureTimestampLabel()
         configureNewsImageView()
         configureHeadlineLabel()
-        configureTimestampLabel()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-   public func set(newsItem: News) {
+    public func set(newsItem: Article) {
         //TODO: Adjust to match info needed from API call
-        newsImageView.image = newsItem.image
-        headlineLabel.text = newsItem.headline
-        timestampLabel.text = newsItem.timeStamp
+        newsImageView.downloadImage(from: newsItem.urlToImage ?? "")
+        headlineLabel.text = newsItem.title
+        timestampLabel.text = newsItem.publishedAt
     }
     
     func configureNewsImageView() {
@@ -37,8 +38,8 @@ class NewsCell: UITableViewCell {
         NSLayoutConstraint.activate([
             newsImageView.topAnchor.constraint(equalTo: topAnchor, constant: K.newsCellPadding),
             newsImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -K.newsCellPadding),
-            newsImageView.heightAnchor.constraint(equalToConstant: 92),
-            newsImageView.widthAnchor.constraint(equalTo: newsImageView.heightAnchor, multiplier: 4/3)
+            newsImageView.heightAnchor.constraint(equalToConstant: 80),
+            newsImageView.widthAnchor.constraint(equalTo: newsImageView.heightAnchor, multiplier: 4/3),
         ])
     }
     
@@ -49,7 +50,9 @@ class NewsCell: UITableViewCell {
             headlineLabel.topAnchor.constraint(equalTo: topAnchor, constant: K.newsCellPadding),
             headlineLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: K.newsCellPadding),
             headlineLabel.trailingAnchor.constraint(equalTo: newsImageView.leadingAnchor, constant: -K.newsCellPadding),
-            headlineLabel.heightAnchor.constraint(equalToConstant: 92)
+//            headlineLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -K.newsCellPadding),
+//            headlineLabel.heightAnchor.constraint(equalToConstant: 92)
+            headlineLabel.bottomAnchor.constraint(equalTo: timestampLabel.topAnchor)
         ])
     }
     
@@ -57,7 +60,8 @@ class NewsCell: UITableViewCell {
         addSubview(timestampLabel)
         
         NSLayoutConstraint.activate([
-            timestampLabel.topAnchor.constraint(equalTo: newsImageView.bottomAnchor, constant: 6),
+//            timestampLabel.topAnchor.constraint(equalTo: newsImageView.bottomAnchor, constant: 6),
+            timestampLabel.heightAnchor.constraint(equalToConstant: 50),
             timestampLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: K.newsCellPadding),
             timestampLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -K.newsCellPadding),
             timestampLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -6)

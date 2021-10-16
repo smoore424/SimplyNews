@@ -6,15 +6,18 @@
 //
 
 import Foundation
+import UIKit
     
 class NetworkManager {
     
     static let shared = NetworkManager()
     
-    let baseURL = "https://newsapi.org/v2/top-headlines?"
-    let country = "country=us"
+    private let baseURL = "https://newsapi.org/v2/top-headlines?"
+    private let country = "country=us"
     //TODO: Protect APIKey before turning public on github
-    let apiKey = "&apiKey=f16bdbdfe2944f1f982591999133f53a"
+    private let apiKey = "&apiKey=f16bdbdfe2944f1f982591999133f53a"
+    
+    let cache = NSCache<NSString, UIImage>()
     
     private init() {}
     
