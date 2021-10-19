@@ -16,7 +16,7 @@ class MainViewController: UIViewController {
         tableView.tableFooterView = UIView()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = 200
+        tableView.rowHeight = 116
         //register cell
         tableView.register(NewsCell.self, forCellReuseIdentifier: K.newsCell)
         return tableView

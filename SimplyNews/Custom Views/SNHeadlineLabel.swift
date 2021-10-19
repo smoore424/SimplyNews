@@ -27,9 +27,9 @@ class SNHeadlineLabel: UILabel {
     private func configure() {
         numberOfLines = 0
         adjustsFontSizeToFitWidth = true
-        lineBreakMode = .byWordWrapping
+        lineBreakMode = .byTruncatingTail
         
-        font = UIFont.preferredFont(forTextStyle: .title1)
+        font = UIFont.preferredFont(forTextStyle: .title2)
         textColor = .label
         
         translatesAutoresizingMaskIntoConstraints = false

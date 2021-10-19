@@ -15,9 +15,9 @@ class NewsCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        configureTimestampLabel()
         configureNewsImageView()
+        configureTimestampLabel()
+        
         configureHeadlineLabel()
     }
     
@@ -38,7 +38,7 @@ class NewsCell: UITableViewCell {
         NSLayoutConstraint.activate([
             newsImageView.topAnchor.constraint(equalTo: topAnchor, constant: K.newsCellPadding),
             newsImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -K.newsCellPadding),
-            newsImageView.heightAnchor.constraint(equalToConstant:92),
+            newsImageView.heightAnchor.constraint(equalToConstant: 92),
             newsImageView.widthAnchor.constraint(equalTo: newsImageView.heightAnchor, multiplier: 4/3),
         ])
     }
@@ -47,10 +47,10 @@ class NewsCell: UITableViewCell {
         addSubview(headlineLabel)
         
         NSLayoutConstraint.activate([
-            headlineLabel.topAnchor.constraint(equalTo: topAnchor, constant: K.newsCellPadding),
+            headlineLabel.topAnchor.constraint(equalTo: timestampLabel.bottomAnchor, constant: K.newsCellPadding/2),
             headlineLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: K.newsCellPadding),
             headlineLabel.trailingAnchor.constraint(equalTo: newsImageView.leadingAnchor, constant: -K.newsCellPadding),
-            headlineLabel.bottomAnchor.constraint(equalTo: timestampLabel.topAnchor)
+            headlineLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -K.newsCellPadding)
         ])
     }
     
@@ -58,10 +58,10 @@ class NewsCell: UITableViewCell {
         addSubview(timestampLabel)
         
         NSLayoutConstraint.activate([
-            timestampLabel.heightAnchor.constraint(equalToConstant: 50),
+            timestampLabel.topAnchor.constraint(equalTo: topAnchor, constant:   K.newsCellPadding),
             timestampLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: K.newsCellPadding),
-            timestampLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -K.newsCellPadding),
-            timestampLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -6)
+            timestampLabel.trailingAnchor.constraint(equalTo: newsImageView.leadingAnchor, constant: -K.newsCellPadding),
+            timestampLabel.heightAnchor.constraint(equalToConstant: 16),
         ])
     }
 }

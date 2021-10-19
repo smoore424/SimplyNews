@@ -26,6 +26,7 @@ class SNTimestampLabel: UILabel {
     
     private func configure() {
         font = UIFont.preferredFont(forTextStyle: .caption1)
+        textColor = .secondaryLabel
         translatesAutoresizingMaskIntoConstraints = false
     }
     
