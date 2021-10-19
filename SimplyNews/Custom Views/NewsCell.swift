@@ -38,7 +38,7 @@ class NewsCell: UITableViewCell {
         NSLayoutConstraint.activate([
             newsImageView.topAnchor.constraint(equalTo: topAnchor, constant: K.newsCellPadding),
             newsImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -K.newsCellPadding),
-            newsImageView.heightAnchor.constraint(equalToConstant: 80),
+            newsImageView.heightAnchor.constraint(equalToConstant:92),
             newsImageView.widthAnchor.constraint(equalTo: newsImageView.heightAnchor, multiplier: 4/3),
         ])
     }
@@ -50,8 +50,6 @@ class NewsCell: UITableViewCell {
             headlineLabel.topAnchor.constraint(equalTo: topAnchor, constant: K.newsCellPadding),
             headlineLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: K.newsCellPadding),
             headlineLabel.trailingAnchor.constraint(equalTo: newsImageView.leadingAnchor, constant: -K.newsCellPadding),
-//            headlineLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -K.newsCellPadding),
-//            headlineLabel.heightAnchor.constraint(equalToConstant: 92)
             headlineLabel.bottomAnchor.constraint(equalTo: timestampLabel.topAnchor)
         ])
     }
@@ -60,7 +58,6 @@ class NewsCell: UITableViewCell {
         addSubview(timestampLabel)
         
         NSLayoutConstraint.activate([
-//            timestampLabel.topAnchor.constraint(equalTo: newsImageView.bottomAnchor, constant: 6),
             timestampLabel.heightAnchor.constraint(equalToConstant: 50),
             timestampLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: K.newsCellPadding),
             timestampLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -K.newsCellPadding),

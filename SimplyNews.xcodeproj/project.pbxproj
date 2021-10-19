@@ -25,7 +25,6 @@
 		019E6708271465620042B28B /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019E6707271465620042B28B /* NetworkManager.swift */; };
 		019E670A271467BC0042B28B /* SNError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019E6709271467BC0042B28B /* SNError.swift */; };
 		01B43A47270E39B6003CC4B8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B43A46270E39B6003CC4B8 /* Constants.swift */; };
-		01B43A49270E3CE9003CC4B8 /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B43A48270E3CE9003CC4B8 /* ArticleViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,7 +48,6 @@
 		019E6707271465620042B28B /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		019E6709271467BC0042B28B /* SNError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNError.swift; sourceTree = "<group>"; };
 		01B43A46270E39B6003CC4B8 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		01B43A48270E3CE9003CC4B8 /* ArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,8 +86,6 @@
 				019E66EE27137D7E0042B28B /* Model */,
 				019E66E5271365070042B28B /* Custom Views */,
 				019E670C2714712F0042B28B /* ViewControllers */,
-				015C4B86270D1382001A9D1B /* News.swift */,
-				015C4B83270CEA74001A9D1B /* NewsCell.swift */,
 				01207BD6270A6D5700E363F3 /* Info.plist */,
 			);
 			path = SimplyNews;
@@ -114,6 +110,7 @@
 				019E66EA27136A490042B28B /* SNNewsImageView.swift */,
 				019E66EC27136EBF0042B28B /* SNContentView.swift */,
 				010F1CCD270B31C70089EF86 /* UIView+Extension.swift */,
+				015C4B83270CEA74001A9D1B /* NewsCell.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -149,7 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				01207BCC270A6D5200E363F3 /* MainViewController.swift */,
-				01B43A48270E3CE9003CC4B8 /* ArticleViewController.swift */,
+				015C4B86270D1382001A9D1B /* News.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -229,7 +226,6 @@
 				01207BCD270A6D5200E363F3 /* MainViewController.swift in Sources */,
 				019E66EB27136A490042B28B /* SNNewsImageView.swift in Sources */,
 				019E6708271465620042B28B /* NetworkManager.swift in Sources */,
-				01B43A49270E3CE9003CC4B8 /* ArticleViewController.swift in Sources */,
 				01207BC9270A6D5200E363F3 /* AppDelegate.swift in Sources */,
 				019E66ED27136EBF0042B28B /* SNContentView.swift in Sources */,
 				019E66F027137E5A0042B28B /* SNResponse.swift in Sources */,
