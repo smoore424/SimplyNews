@@ -10,6 +10,7 @@ import UIKit
 extension UIView {
     func pin(to superView: UIView) {
         translatesAutoresizingMaskIntoConstraints = false
+        //TODO: refactor to NSLayoutContraints
         topAnchor.constraint(equalTo: superView.topAnchor).isActive = true
         leftAnchor.constraint(equalTo: superView.leftAnchor).isActive = true
         rightAnchor.constraint(equalTo: superView.rightAnchor).isActive = true

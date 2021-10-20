@@ -12,6 +12,10 @@ class MainViewController: UIViewController {
     
     var newsItems: [Article] = []
 
+    var collectionViewContentView: UIView!
+    var collectionView: UICollectionView!
+    
+    var tableViewContentView: UIView!
     lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.tableFooterView = UIView()
@@ -25,10 +29,10 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setCollectionViewUI()
         setNavigationUI()
         setTableViewUI()
         getNews()
-
     }
     
     
@@ -42,28 +46,61 @@ class MainViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
-                
+            //TODO: handle error
             case .failure(let error):
                 print(error)
             }
         }
     }
     
-    
 }
 
 
 extension MainViewController {
+    
     private func setNavigationUI() {
+        view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
         title = "Simply News"
     }
     
     
+    private func setCollectionViewUI() {
+        collectionViewContentView = UIView(frame: .zero)
+        view.addSubview(collectionViewContentView)
+        collectionViewContentView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            collectionViewContentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            collectionViewContentView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            collectionViewContentView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            collectionViewContentView.heightAnchor.constraint(equalToConstant: 58)
+        ])
+        
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        
+        collectionViewContentView.addSubview(collectionView)
+        collectionView.delegate = self
+        collectionView.backgroundColor = .systemPurple
+        collectionView.pin(to: collectionViewContentView)
+    }
+    
+    
     private func setTableViewUI() {
+        tableViewContentView = UIView(frame: .zero)
+        view.addSubview(tableViewContentView)
+        tableViewContentView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            tableViewContentView.topAnchor.constraint(equalTo: collectionViewContentView.bottomAnchor),
+            tableViewContentView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            tableViewContentView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            tableViewContentView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+        
+        tableViewContentView.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(tableView)
-        tableView.pin(to: view)
+        tableView.pin(to: tableViewContentView)
     }
 }
 
@@ -72,6 +109,7 @@ extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return newsItems.count
     }
+    
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -107,4 +145,9 @@ extension MainViewController: SFSafariViewControllerDelegate {
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
         dismiss(animated: true)
     }
+}
+
+
+extension MainViewController: UICollectionViewDelegate {
+    
 }
