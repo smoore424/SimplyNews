@@ -5,6 +5,7 @@
 //  Created by Stacey Moore on 10/3/21.
 //
 
+import SafariServices
 import UIKit
 
 class MainViewController: UIViewController {
@@ -30,6 +31,7 @@ class MainViewController: UIViewController {
 
     }
     
+    
     func getNews() {
         NetworkManager.shared.getTopUSNews { [weak self] result in
             guard let self = self else { return }
@@ -46,6 +48,7 @@ class MainViewController: UIViewController {
             }
         }
     }
+    
     
 }
 
@@ -83,6 +86,25 @@ extension MainViewController: UITableViewDataSource {
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
+        let url = newsItems[indexPath.row].url
+        
+        if let url = URL(string: url) {
+            let config = SFSafariViewController.Configuration()
+            config.entersReaderIfAvailable = true
+            
+            let vc = SFSafariViewController(url: url, configuration: config)
+            vc.delegate = self
+    
+            present(vc, animated: true)
+        }
+        
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+
+extension MainViewController: SFSafariViewControllerDelegate {
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        dismiss(animated: true)
     }
 }
