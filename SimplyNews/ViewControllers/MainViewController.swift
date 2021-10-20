@@ -46,16 +46,17 @@ class MainViewController: UIViewController {
             }
         }
     }
+    
 }
 
+
 extension MainViewController {
-    func setNavigationUI() {
+    private func setNavigationUI() {
         navigationController?.navigationBar.prefersLargeTitles = true
         title = "Simply News"
     }
-}
-
-extension MainViewController {
+    
+    
     private func setTableViewUI() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
@@ -63,10 +64,12 @@ extension MainViewController {
     }
 }
 
+
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return newsItems.count
     }
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.newsCell) as! NewsCell
@@ -75,6 +78,7 @@ extension MainViewController: UITableViewDataSource {
         return cell
     }
 }
+
 
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

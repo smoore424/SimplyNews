@@ -15,22 +15,27 @@ class NewsCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
         configureNewsImageView()
         configureTimestampLabel()
-        
         configureHeadlineLabel()
     }
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     public func set(newsItem: Article) {
         //TODO: Adjust to match info needed from API call
         newsImageView.downloadImage(from: newsItem.urlToImage ?? "")
         headlineLabel.text = newsItem.title
-        timestampLabel.text = newsItem.publishedAt
+        timestampLabel.text = newsItem.publishedAt.convertToDisplayFormat()
+        print(newsItem.title)
+        print(newsItem.publishedAt)
     }
+    
     
     func configureNewsImageView() {
         addSubview(newsImageView)
