@@ -66,6 +66,7 @@ extension MainViewController {
     
     
     private func setCollectionViewUI() {
+        let padding: CGFloat = 10
         collectionViewContentView = UIView(frame: .zero)
         view.addSubview(collectionViewContentView)
         collectionViewContentView.translatesAutoresizingMaskIntoConstraints = false
@@ -74,15 +75,33 @@ extension MainViewController {
             collectionViewContentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             collectionViewContentView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             collectionViewContentView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            collectionViewContentView.heightAnchor.constraint(equalToConstant: 58)
+            collectionViewContentView.heightAnchor.constraint(equalToConstant: 120)
         ])
         
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = padding
+//        layout.minimumInteritemSpacing = 4
+        layout.itemSize = CGSize(width: 120, height: 100)
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.backgroundColor = .white
+        collectionView.register(CategoryCell.self, forCellWithReuseIdentifier: CategoryCell.reuseID)
+//        collectionView.pin(to: collectionViewContentView)
         
         collectionViewContentView.addSubview(collectionView)
-        collectionView.delegate = self
-        collectionView.backgroundColor = .systemPurple
-        collectionView.pin(to: collectionViewContentView)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+  
+        
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: collectionViewContentView.topAnchor, constant: padding),
+            collectionView.leadingAnchor.constraint(equalTo: collectionViewContentView.leadingAnchor, constant: padding),
+            collectionView.trailingAnchor.constraint(equalTo: collectionViewContentView.trailingAnchor, constant: -padding),
+            collectionView.bottomAnchor.constraint(equalTo: collectionViewContentView.bottomAnchor, constant: -padding)
+        ])
+
     }
     
     
@@ -102,6 +121,22 @@ extension MainViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.pin(to: tableViewContentView)
     }
+    
+}
+
+extension MainViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return categories.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.reuseID, for: indexPath) as! CategoryCell
+
+        cell.setCells(for: indexPath.item)
+        return cell
+    }
+    
+    
 }
 
 
