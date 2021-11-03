@@ -34,14 +34,6 @@ class CategoryCell: UICollectionViewCell {
         
         imageView.image = category[indexPath].image
         imageView.tintColor = category[indexPath].color
-//        for category in categories {
-//            layer.borderColor = category.color.cgColor
-//            label.text = category.text
-//            label.textColor = category.color
-//
-//            imageView.image = category.image
-//            imageView.tintColor = category.color
-//        }
     }
     
     private func configure() {
@@ -53,12 +45,12 @@ class CategoryCell: UICollectionViewCell {
         let padding: CGFloat = 5
         
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: topAnchor, constant: padding),
-            imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
-            imageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
-            imageView.heightAnchor.constraint(equalToConstant: 60),
+            imageView.topAnchor.constraint(equalTo: topAnchor, constant: padding * 2),
+            imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            imageView.heightAnchor.constraint(equalToConstant: 40),
+            imageView.widthAnchor.constraint(equalToConstant: 40),
             
-            label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: padding),
+            label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: padding * 2),
             label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
             label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
             label.heightAnchor.constraint(equalToConstant: 20)
