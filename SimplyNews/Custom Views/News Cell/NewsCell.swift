@@ -9,7 +9,7 @@ import UIKit
 
 class NewsCell: UITableViewCell {
     
-    let newsImageView = SNNewsImageView(cornerRadius: 10)
+    let newsImageView = SNNewsImageView()
     let headlineLabel = SNHeadlineLabel(textAlignment: .left)
     let timestampLabel = SNTimestampLabel(textAlignment: .left)
     

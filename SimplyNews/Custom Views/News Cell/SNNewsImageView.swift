@@ -21,13 +21,12 @@ class SNNewsImageView: UIImageView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(cornerRadius: CGFloat) {
+    convenience init() {
         super.init(frame: .zero)
-        self.layer.cornerRadius = cornerRadius
-        configure()
     }
     
     private func configure() {
+        layer.cornerRadius = 10
         clipsToBounds = true
         translatesAutoresizingMaskIntoConstraints = false
     }

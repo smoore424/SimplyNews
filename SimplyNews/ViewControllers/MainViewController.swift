@@ -81,7 +81,6 @@ extension MainViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = padding
-//        layout.minimumInteritemSpacing = 4
         layout.itemSize = CGSize(width: 120, height: 100)
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         
@@ -135,8 +134,6 @@ extension MainViewController: UICollectionViewDataSource {
         cell.setCells(for: indexPath.item)
         return cell
     }
-    
-    
 }
 
 

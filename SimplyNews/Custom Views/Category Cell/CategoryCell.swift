@@ -27,6 +27,8 @@ class CategoryCell: UICollectionViewCell {
     func setCells(for indexPath: Int) {
         let category = categories
         layer.borderColor = category[indexPath].color.cgColor
+        layer.cornerRadius = 10
+        layer.masksToBounds = true
         label.text = category[indexPath].text
         label.textColor = category[indexPath].color
         
