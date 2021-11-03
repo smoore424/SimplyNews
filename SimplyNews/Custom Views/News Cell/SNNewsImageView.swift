@@ -21,10 +21,6 @@ class SNNewsImageView: UIImageView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    convenience init() {
-        super.init(frame: .zero)
-    }
-    
     private func configure() {
         layer.cornerRadius = 10
         clipsToBounds = true
