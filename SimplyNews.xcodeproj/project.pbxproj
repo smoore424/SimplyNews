@@ -167,7 +167,6 @@
 			isa = PBXGroup;
 			children = (
 				01207BCC270A6D5200E363F3 /* MainViewController.swift */,
-				015C4B86270D1382001A9D1B /* News.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -195,6 +194,7 @@
 		01D0E6FB2720D45300991AF3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				015C4B86270D1382001A9D1B /* News.swift */,
 				019E66EE27137D7E0042B28B /* Network Response */,
 				01D0E6FC2720D48200991AF3 /* Category.swift */,
 			);

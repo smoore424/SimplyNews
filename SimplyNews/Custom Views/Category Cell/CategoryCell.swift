@@ -25,6 +25,7 @@ class CategoryCell: UICollectionViewCell {
     }
     
     func setCells(for indexPath: Int) {
+        backgroundColor = .systemBackground
         let category = categories
         layer.borderColor = category[indexPath].color.cgColor
         layer.cornerRadius = 10

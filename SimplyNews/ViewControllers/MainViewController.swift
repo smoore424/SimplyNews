@@ -68,6 +68,7 @@ extension MainViewController {
     private func setCollectionViewUI() {
         let padding: CGFloat = 10
         collectionViewContentView = UIView(frame: .zero)
+        collectionViewContentView.backgroundColor = .systemBackground
         view.addSubview(collectionViewContentView)
         collectionViewContentView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -75,7 +76,7 @@ extension MainViewController {
             collectionViewContentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             collectionViewContentView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             collectionViewContentView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            collectionViewContentView.heightAnchor.constraint(equalToConstant: 120)
+            collectionViewContentView.heightAnchor.constraint(equalToConstant: 130)
         ])
         
         let layout = UICollectionViewFlowLayout()
@@ -88,8 +89,8 @@ extension MainViewController {
         collectionView.delegate = self
         collectionView.backgroundColor = .white
         collectionView.register(CategoryCell.self, forCellWithReuseIdentifier: CategoryCell.reuseID)
-//        collectionView.pin(to: collectionViewContentView)
         
+        collectionView.backgroundColor = .systemBackground
         collectionViewContentView.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
   
@@ -122,6 +123,7 @@ extension MainViewController {
     }
     
 }
+
 
 extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
