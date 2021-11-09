@@ -45,16 +45,29 @@ class CategoryCell: UICollectionViewCell {
         
         let padding: CGFloat = 5
         
+//        NSLayoutConstraint.activate([
+//            imageView.topAnchor.constraint(equalTo: topAnchor, constant: padding * 2),
+//            imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+//            imageView.heightAnchor.constraint(equalToConstant: 40),
+//            imageView.widthAnchor.constraint(equalToConstant: 40),
+//
+//            label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: padding * 2),
+//            label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
+//            label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
+//            label.heightAnchor.constraint(equalToConstant: 20)
+//        ])
+        
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: topAnchor, constant: padding * 2),
-            imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            imageView.heightAnchor.constraint(equalToConstant: 40),
-            imageView.widthAnchor.constraint(equalToConstant: 40),
+            imageView.topAnchor.constraint(equalTo: topAnchor),
+            imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            imageView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: padding * 2),
+//            label.centerXAnchor.constraint(equalTo: centerXAnchor),
+            label.centerYAnchor.constraint(equalTo: centerYAnchor),
             label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
             label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
-            label.heightAnchor.constraint(equalToConstant: 20)
+            label.heightAnchor.constraint(equalToConstant: 38)
         ])
     }
 }

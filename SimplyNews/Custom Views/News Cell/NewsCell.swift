@@ -40,6 +40,7 @@ class NewsCell: UITableViewCell {
     func configureNewsImageView() {
         addSubview(newsImageView)
         
+        
         NSLayoutConstraint.activate([
             newsImageView.topAnchor.constraint(equalTo: topAnchor, constant: K.newsCellPadding),
             newsImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -K.newsCellPadding),

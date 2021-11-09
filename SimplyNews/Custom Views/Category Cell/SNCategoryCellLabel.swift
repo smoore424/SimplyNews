@@ -28,7 +28,7 @@ class SNCategoryCellLabel: UILabel {
     
     
     private func configure() {
-        font = UIFont.preferredFont(forTextStyle: .subheadline)
+        font = UIFont.preferredFont(forTextStyle: .largeTitle)
         textAlignment = .center
         translatesAutoresizingMaskIntoConstraints = false
     }

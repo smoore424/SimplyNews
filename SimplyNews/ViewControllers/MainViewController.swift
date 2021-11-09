@@ -76,13 +76,13 @@ extension MainViewController {
             collectionViewContentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             collectionViewContentView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             collectionViewContentView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            collectionViewContentView.heightAnchor.constraint(equalToConstant: 130)
+            collectionViewContentView.heightAnchor.constraint(equalToConstant: 150)
         ])
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = padding
-        layout.itemSize = CGSize(width: 120, height: 100)
+        layout.itemSize = CGSize(width: 240, height: 120)
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         
         collectionView.dataSource = self
