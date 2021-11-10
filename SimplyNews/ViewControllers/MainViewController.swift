@@ -32,12 +32,12 @@ class MainViewController: UIViewController {
         setCollectionViewUI()
         setNavigationUI()
         setTableViewUI()
-        getNews()
+        getNews(category: .general)
     }
     
     
-    func getNews() {
-        NetworkManager.shared.getTopUSNews { [weak self] result in
+    func getNews(category: CategoryType) {
+        NetworkManager.shared.getTopUSNews(category: category) { [weak self] result in
             guard let self = self else { return }
             
             switch result {
@@ -130,11 +130,20 @@ extension MainViewController: UICollectionViewDataSource {
         return categories.count
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.reuseID, for: indexPath) as! CategoryCell
 
         cell.setCells(for: indexPath.item)
         return cell
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) as? CategoryCell {
+            let catID = cell.getCategoryID(for: indexPath.item)
+            getNews(category: catID)
+        }
     }
 }
 
@@ -143,7 +152,6 @@ extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return newsItems.count
     }
-    
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

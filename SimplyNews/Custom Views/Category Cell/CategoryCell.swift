@@ -38,6 +38,11 @@ class CategoryCell: UICollectionViewCell {
     }
     
     
+    func getCategoryID(for indexPath: Int) -> CategoryType {
+        let category = categories
+        return category[indexPath].categoryID
+    }
+    
     private func configure() {
         layer.borderWidth = 2
         
