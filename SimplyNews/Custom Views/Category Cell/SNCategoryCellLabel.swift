@@ -20,16 +20,16 @@ class SNCategoryCellLabel: UILabel {
     }
     
     
-    init(text: String, textColor: UIColor) {
+    init(text: String) {
         super.init(frame: .zero)
         self.text = text
-        self.textColor = textColor
     }
     
     
     private func configure() {
         font = UIFont.preferredFont(forTextStyle: .largeTitle)
         textAlignment = .center
+        textColor = .white
         translatesAutoresizingMaskIntoConstraints = false
     }
 }

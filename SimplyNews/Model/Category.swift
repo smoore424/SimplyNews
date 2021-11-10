@@ -19,21 +19,10 @@ struct Category {
     }
 }
 
-//let categories: [Category] = [
-//    Category(color: .systemTeal, text: "All", image: UIImage(systemName: "doc.richtext")!),
-//    Category(color: .systemBlue, text: "Business", image: UIImage(systemName: "dollarsign.circle")!),
-//    Category(color: .systemPink, text: "Entertainmant", image: UIImage(systemName: "guitars")!),
-//    Category(color: .systemYellow, text: "General", image: UIImage(systemName: "person.and.person")!),
-//    Category(color: .systemRed, text: "Health", image: UIImage(systemName: "bandage")!),
-//    Category(color: .systemGreen, text: "Science", image: UIImage(systemName: "radiowaves.left")!),
-//    Category(color: .systemOrange, text: "Sports", image: UIImage(systemName: "sportscourt")!),
-//    Category(color: .systemBrown, text: "Technology", image: UIImage(systemName: "desktopcomputer")!)
-//]
-
 let categories: [Category] = [
     Category(color: .systemTeal, text: "All", image: UIImage(named: "all")!),
     Category(color: .systemBlue, text: "Business", image: UIImage(named: "business")!),
-    Category(color: .systemPink, text: "Entertainmant", image: UIImage(named: "entertainment")!),
+    Category(color: .systemPink, text: "Entertainmant", image: UIImage(named: "entertainment2")!),
     Category(color: .systemYellow, text: "General", image: UIImage(named: "general")!),
     Category(color: .systemRed, text: "Health", image: UIImage(named: "health")!),
     Category(color: .systemGreen, text: "Science", image: UIImage(named: "science")!),

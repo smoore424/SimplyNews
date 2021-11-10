@@ -21,13 +21,7 @@ class SNCategoryCellImageView: UIImageView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
-    init(image: UIImage, tintColor: UIColor) {
-        super.init(frame: .zero)
-        cellImage = image
-        cellImage.withTintColor(tintColor)
-        
-    }
+
     private func configure() {
         translatesAutoresizingMaskIntoConstraints = false
     }
