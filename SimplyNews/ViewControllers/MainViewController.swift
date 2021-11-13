@@ -11,13 +11,13 @@ import UIKit
 class MainViewController: UIViewController {
     
     var newsItems: [Article] = []
-//    var page: Int = 1
-//    var hasMoreNews = true
+    var selectedCategory: CategoryType = .general
 
     var collectionViewContentView: UIView!
     var collectionView: UICollectionView!
     
     var tableViewContentView: UIView!
+    
     lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.tableFooterView = UIView()
@@ -34,7 +34,7 @@ class MainViewController: UIViewController {
         setCollectionViewUI()
         setNavigationUI()
         setTableViewUI()
-        getNews(category: .general)
+        getNews(category: selectedCategory)
     }
     
     
@@ -44,8 +44,7 @@ class MainViewController: UIViewController {
             
             switch result {
             case .success(let response):
-//                if response.totalResults < 100 { self.hasMoreNews = false }
-                self.newsItems = response.articles
+                self.newsItems.append(contentsOf: response.articles)
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
@@ -55,7 +54,6 @@ class MainViewController: UIViewController {
             }
         }
     }
-    
 }
 
 
@@ -146,7 +144,9 @@ extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) as? CategoryCell {
             let catID = cell.getCategoryID(for: indexPath.item)
-            getNews(category: catID)
+            selectedCategory = catID
+            newsItems.removeAll()
+            getNews(category: selectedCategory)
         }
     }
 }
@@ -197,3 +197,22 @@ extension MainViewController: SFSafariViewControllerDelegate {
 extension MainViewController: UICollectionViewDelegate {
     
 }
+
+/*
+ Unable to support pagination at this time due to free API limitations.
+ Only allows for a total of 100 responses in a free account
+ To perserve API calls, best just to try and get 100 upfront.
+ */
+//extension MainViewController: UIScrollViewDelegate {
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        let position = scrollView.contentOffset.y
+//        let contentHeight = tableView.contentSize.height - 100
+//        let height = scrollView.frame.size.height
+//
+//        if position > contentHeight - height {
+//            guard hasMoreNews else { return }
+//            page += 1
+//            getNews(category: selectedCategory)
+//        }
+//    }
+//}
