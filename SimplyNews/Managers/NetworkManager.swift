@@ -24,7 +24,6 @@ class NetworkManager {
     //what endpoint should look like with country and category: https://newsapi.org/v2/top-headlines?country=de&category=business&apiKey=f16bdbdfe2944f1f982591999133f53a
     private let baseURL = "https://newsapi.org/v2/top-headlines?"
     private let country = "country=us"
-//    private let category = "&category="
     //TODO: Protect APIKey before turning public on github
     private let apiKey = "&apiKey=f16bdbdfe2944f1f982591999133f53a"
     
@@ -32,9 +31,9 @@ class NetworkManager {
     
     private init() {}
     
-    func getTopUSNews(category: CategoryType, completed: @escaping (Result<SNResponse, SNError>) -> Void) {
+    func getNews(category: CategoryType, completed: @escaping (Result<SNResponse, SNError>) -> Void) {
         
-        let endpoint = baseURL + country + category.rawValue + apiKey
+        let endpoint = baseURL + country + category.rawValue + "&pageSize=100" + apiKey
         print(endpoint)
         
         guard let url = URL(string: endpoint) else {

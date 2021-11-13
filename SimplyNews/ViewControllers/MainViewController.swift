@@ -11,6 +11,8 @@ import UIKit
 class MainViewController: UIViewController {
     
     var newsItems: [Article] = []
+//    var page: Int = 1
+//    var hasMoreNews = true
 
     var collectionViewContentView: UIView!
     var collectionView: UICollectionView!
@@ -37,11 +39,12 @@ class MainViewController: UIViewController {
     
     
     func getNews(category: CategoryType) {
-        NetworkManager.shared.getTopUSNews(category: category) { [weak self] result in
+        NetworkManager.shared.getNews(category: category) { [weak self] result in
             guard let self = self else { return }
             
             switch result {
             case .success(let response):
+//                if response.totalResults < 100 { self.hasMoreNews = false }
                 self.newsItems = response.articles
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
@@ -83,6 +86,7 @@ extension MainViewController {
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = padding
         layout.itemSize = CGSize(width: 240, height: 120)
+        layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 0, right: 5)
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         
         collectionView.dataSource = self
