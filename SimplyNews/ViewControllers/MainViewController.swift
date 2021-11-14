@@ -33,6 +33,7 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         setCollectionViewUI()
         setNavigationUI()
+        configureSearchController()
         setTableViewUI()
         getNews(category: selectedCategory)
     }
@@ -57,6 +58,7 @@ class MainViewController: UIViewController {
 }
 
 
+//MARK: - UI Configuration
 extension MainViewController {
     
     private func setNavigationUI() {
@@ -124,10 +126,18 @@ extension MainViewController {
         tableView.pin(to: tableViewContentView)
     }
     
+    
+    func configureSearchController() {
+        let searchController = UISearchController()
+        searchController.searchBar.delegate = self
+        searchController.searchBar.placeholder = "Search News"
+        navigationItem.searchController = searchController
+    }
 }
 
 
-extension MainViewController: UICollectionViewDataSource {
+//MARK: - UICollectionView
+extension MainViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return categories.count
     }
@@ -152,7 +162,8 @@ extension MainViewController: UICollectionViewDataSource {
 }
 
 
-extension MainViewController: UITableViewDataSource {
+//MARK: - UITableView
+extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return newsItems.count
     }
@@ -164,10 +175,7 @@ extension MainViewController: UITableViewDataSource {
         cell.set(newsItem: newsItem)
         return cell
     }
-}
-
-
-extension MainViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         let url = newsItems[indexPath.row].url
@@ -187,15 +195,17 @@ extension MainViewController: UITableViewDelegate {
 }
 
 
+//MARK: - SearchController
+extension MainViewController: UISearchBarDelegate {
+    
+}
+
+
+//MARK: - SFSafariViewController
 extension MainViewController: SFSafariViewControllerDelegate {
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
         dismiss(animated: true)
     }
-}
-
-
-extension MainViewController: UICollectionViewDelegate {
-    
 }
 
 /*
