@@ -29,11 +29,18 @@ class MainViewController: UIViewController {
         return tableView
     }()
     
+    lazy var searchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.sizeToFit()
+        searchBar.delegate = self
+        return searchBar
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setCollectionViewUI()
         setNavigationUI()
-        configureSearchController()
+        showSearchBarButton(shouldShow: true)
         setTableViewUI()
         getNews(category: selectedCategory)
     }
@@ -64,7 +71,7 @@ extension MainViewController {
     private func setNavigationUI() {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
-        title = "Simply News"
+        navigationItem.title = "Simply News"
     }
     
     
@@ -98,7 +105,6 @@ extension MainViewController {
         collectionViewContentView.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
   
-        
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: collectionViewContentView.topAnchor, constant: padding),
             collectionView.leadingAnchor.constraint(equalTo: collectionViewContentView.leadingAnchor, constant: padding),
@@ -124,14 +130,6 @@ extension MainViewController {
         tableViewContentView.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.pin(to: tableViewContentView)
-    }
-    
-    
-    func configureSearchController() {
-        let searchController = UISearchController()
-        searchController.searchBar.delegate = self
-        searchController.searchBar.placeholder = "Search News"
-        navigationItem.searchController = searchController
     }
 }
 
@@ -195,9 +193,33 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
 }
 
 
-//MARK: - SearchController
+//MARK: - SearchBar
 extension MainViewController: UISearchBarDelegate {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        search(shouldShow: false)
+    }
     
+    
+    func showSearchBarButton(shouldShow: Bool) {
+        if shouldShow {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(showSearchBar))
+        } else {
+            navigationItem.rightBarButtonItem = nil
+        }
+    }
+    
+    
+    func search(shouldShow: Bool) {
+        showSearchBarButton(shouldShow: !shouldShow)
+        searchBar.showsCancelButton = shouldShow
+        navigationItem.titleView = shouldShow ? searchBar : nil
+    }
+    
+    
+    @objc func showSearchBar() {
+        search(shouldShow: true)
+        searchBar.becomeFirstResponder()
+    }
 }
 
 
