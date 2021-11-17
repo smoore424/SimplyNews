@@ -29,18 +29,11 @@ class MainViewController: UIViewController {
         return tableView
     }()
     
-    lazy var searchBar: UISearchBar = {
-        let searchBar = UISearchBar()
-        searchBar.sizeToFit()
-        searchBar.delegate = self
-        return searchBar
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setCollectionViewUI()
         setNavigationUI()
-        showSearchBarButton(shouldShow: true)
+        setSearchController()
         setTableViewUI()
         getNews(category: selectedCategory)
     }
@@ -75,8 +68,19 @@ extension MainViewController {
     }
     
     
+    func setSearchController() {
+        let searchController = UISearchController(searchResultsController: SearchResultsViewController())
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = true
+        searchController.searchBar.placeholder = "Search News"
+        searchController.showsSearchResultsController = true
+        navigationItem.searchController = searchController
+    }
+    
+    
     private func setCollectionViewUI() {
         let padding: CGFloat = 10
+        
         collectionViewContentView = UIView(frame: .zero)
         collectionViewContentView.backgroundColor = .systemBackground
         view.addSubview(collectionViewContentView)
@@ -194,31 +198,50 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
 
 
 //MARK: - SearchBar
-extension MainViewController: UISearchBarDelegate {
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        search(shouldShow: false)
-    }
-    
-    
-    func showSearchBarButton(shouldShow: Bool) {
-        if shouldShow {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(showSearchBar))
-        } else {
-            navigationItem.rightBarButtonItem = nil
+extension MainViewController: UISearchBarDelegate, UISearchResultsUpdating {
+
+    func updateSearchResults(for searchController: UISearchController) {
+        //when searching
+        print("search tapped")
+        guard let text = searchController.searchBar.text, !text.isEmpty else { return }
+        print(text)
+        //network call here
+        NetworkManager.shared.searchNews(for: text) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let response):
+                self.newsItems.append(contentsOf: response.articles)
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            //TODO: handle error
+            case .failure(let error):
+                print(error)
+            }
         }
     }
     
     
-    func search(shouldShow: Bool) {
-        showSearchBarButton(shouldShow: !shouldShow)
-        searchBar.showsCancelButton = shouldShow
-        navigationItem.titleView = shouldShow ? searchBar : nil
-    }
-    
-    
-    @objc func showSearchBar() {
-        search(shouldShow: true)
-        searchBar.becomeFirstResponder()
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        print("search tapped")
+        guard let text = searchBar.text, !text.isEmpty else { return }
+        print(text)
+        //network call here
+        NetworkManager.shared.searchNews(for: text) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let response):
+                self.newsItems.append(contentsOf: response.articles)
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            //TODO: handle error
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }
 

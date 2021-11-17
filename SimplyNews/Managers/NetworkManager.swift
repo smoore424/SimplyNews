@@ -69,4 +69,43 @@ class NetworkManager {
         }
         task.resume()
     }
+    
+    
+    func searchNews(for keyword: String, completed: @escaping (Result<SNResponse, SNError>) -> Void) {
+        let endpoint = baseURL + country + "&q=\(keyword)" + "&pageSize=100" + apiKey
+        print(endpoint)
+        
+        guard let url = URL(string: endpoint) else {
+            completed(.failure(.invalidURL))
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            
+            if let _ = error {
+                completed(.failure(.invalidResponse))
+            }
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                completed(.failure(.invalidResponse))
+                return
+            }
+
+            guard let data = data else {
+                completed(.failure(.invalidData))
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                
+                let sNResponse = try decoder.decode(SNResponse.self, from: data)
+                completed(.success(sNResponse))
+
+            } catch {
+                completed(.failure(.invalidData))
+            }
+        }
+        task.resume()
+    }
 }

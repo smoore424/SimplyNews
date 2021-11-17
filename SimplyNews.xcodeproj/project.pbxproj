@@ -31,6 +31,7 @@
 		01D0E6F72720C85A00991AF3 /* SNCategoryCellImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D0E6F62720C85A00991AF3 /* SNCategoryCellImageView.swift */; };
 		01D0E6FA2720CB0800991AF3 /* SNCategoryCellLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D0E6F92720CB0800991AF3 /* SNCategoryCellLabel.swift */; };
 		01D0E6FD2720D48200991AF3 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D0E6FC2720D48200991AF3 /* Category.swift */; };
+		01DE249F27445DAB0015B2B9 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DE249E27445DAA0015B2B9 /* SearchResultsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		01D0E6F62720C85A00991AF3 /* SNCategoryCellImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNCategoryCellImageView.swift; sourceTree = "<group>"; };
 		01D0E6F92720CB0800991AF3 /* SNCategoryCellLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNCategoryCellLabel.swift; sourceTree = "<group>"; };
 		01D0E6FC2720D48200991AF3 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		01DE249E27445DAA0015B2B9 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				01207BCC270A6D5200E363F3 /* MainViewController.swift */,
+				01DE249E27445DAA0015B2B9 /* SearchResultsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				01B43A47270E39B6003CC4B8 /* Constants.swift in Sources */,
 				019E670A271467BC0042B28B /* SNError.swift in Sources */,
 				019E66E72713653E0042B28B /* SNHeadlineLabel.swift in Sources */,
+				01DE249F27445DAB0015B2B9 /* SearchResultsViewController.swift in Sources */,
 				01D0E6F72720C85A00991AF3 /* SNCategoryCellImageView.swift in Sources */,
 				010F1CCE270B31C70089EF86 /* UIView+Extension.swift in Sources */,
 				01207BCB270A6D5200E363F3 /* SceneDelegate.swift in Sources */,
