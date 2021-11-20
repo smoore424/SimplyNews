@@ -33,7 +33,6 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         setCollectionViewUI()
         setNavigationUI()
-        setSearchController()
         setTableViewUI()
         getNews(category: selectedCategory)
     }
@@ -55,6 +54,12 @@ class MainViewController: UIViewController {
             }
         }
     }
+    
+    
+    @objc func showSearchResultsVC() {
+        let searchResultsVC = SearchResultsViewController()
+        navigationController?.pushViewController(searchResultsVC, animated: true)
+    }
 }
 
 
@@ -65,16 +70,7 @@ extension MainViewController {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Simply News"
-    }
-    
-    
-    func setSearchController() {
-        let searchController = UISearchController(searchResultsController: SearchResultsViewController())
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = true
-        searchController.searchBar.placeholder = "Search News"
-        searchController.showsSearchResultsController = true
-        navigationItem.searchController = searchController
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(showSearchResultsVC))
     }
     
     
@@ -201,48 +197,29 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
 extension MainViewController: UISearchBarDelegate, UISearchResultsUpdating {
 
     func updateSearchResults(for searchController: UISearchController) {
-        //when searching
-        print("search tapped")
-        guard let text = searchController.searchBar.text, !text.isEmpty else { return }
-        print(text)
-        //network call here
-        NetworkManager.shared.searchNews(for: text) { [weak self] result in
-            guard let self = self else { return }
-            
-            switch result {
-            case .success(let response):
-                self.newsItems.append(contentsOf: response.articles)
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            //TODO: handle error
-            case .failure(let error):
-                print(error)
-            }
-        }
+//        //when searching
+//        print("search tapped")
+//        guard let text = searchController.searchBar.text, !text.isEmpty else { return }
+//        print(text)
+//        //network call here
+//        NetworkManager.shared.searchNews(for: text) { [weak self] result in
+//            guard let self = self else { return }
+//
+//            switch result {
+//            case .success(let response):
+//                self.newsItems.append(contentsOf: response.articles)
+//                DispatchQueue.main.async {
+//                    self.tableView.reloadData()
+//                }
+//            //TODO: handle error
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
     }
     
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print("search tapped")
-        guard let text = searchBar.text, !text.isEmpty else { return }
-        print(text)
-        //network call here
-        NetworkManager.shared.searchNews(for: text) { [weak self] result in
-            guard let self = self else { return }
-            
-            switch result {
-            case .success(let response):
-                self.newsItems.append(contentsOf: response.articles)
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            //TODO: handle error
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
+
 }
 
 
