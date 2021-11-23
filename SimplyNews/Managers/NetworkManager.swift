@@ -22,7 +22,9 @@ class NetworkManager {
     static let shared = NetworkManager()
     
     //what endpoint should look like with country and category: https://newsapi.org/v2/top-headlines?country=de&category=business&apiKey=f16bdbdfe2944f1f982591999133f53a
-    private let baseURL = "https://newsapi.org/v2/top-headlines?"
+    private let baseURL = "https://newsapi.org/v2/"
+    private let topHeadlines = "top-headlines?"
+    private let everything = "everything?"
     private let country = "country=us"
     //TODO: Protect APIKey before turning public on github
     private let apiKey = "&apiKey=f16bdbdfe2944f1f982591999133f53a"
@@ -33,7 +35,7 @@ class NetworkManager {
     
     func getNews(category: CategoryType, completed: @escaping (Result<SNResponse, SNError>) -> Void) {
         
-        let endpoint = baseURL + country + category.rawValue + "&pageSize=100" + apiKey
+        let endpoint = baseURL + topHeadlines + country + category.rawValue + "&pageSize=100" + apiKey
         print(endpoint)
         
         guard let url = URL(string: endpoint) else {
@@ -72,7 +74,7 @@ class NetworkManager {
     
     
     func searchNews(for keyword: String, completed: @escaping (Result<SNResponse, SNError>) -> Void) {
-        let endpoint = baseURL + country + "&q=\(keyword)" + "&pageSize=100" + apiKey
+        let endpoint = baseURL + everything + "q=\(keyword)" + "&pageSize=100" + apiKey
         print(endpoint)
         
         guard let url = URL(string: endpoint) else {

@@ -43,6 +43,24 @@ class SearchResultsViewController: UIViewController {
         searchBar.showsCancelButton = true
         searchBar.becomeFirstResponder()
     }
+    
+    
+    func searchNews(for text: String) {
+        NetworkManager.shared.searchNews(for: text) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let response):
+                self.searchResults.append(contentsOf: response.articles)
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            //TODO: Handle Error
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
 
 }
 
@@ -70,7 +88,12 @@ extension SearchResultsViewController: UISearchBarDelegate {
     
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        print("Search Now")
+        searchResults = []
         //perform network call based on search input
+        guard let text = searchBar.text, !text.isEmpty else { return }
+        searchNews(for: text)
+        
     }
 }
 
