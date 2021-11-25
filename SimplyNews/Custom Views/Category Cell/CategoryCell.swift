@@ -43,6 +43,7 @@ class CategoryCell: UICollectionViewCell {
         return category[indexPath].categoryID
     }
     
+    
     private func configure() {
         layer.borderWidth = 2
         

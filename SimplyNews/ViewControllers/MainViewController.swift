@@ -111,7 +111,6 @@ extension MainViewController {
             collectionView.trailingAnchor.constraint(equalTo: collectionViewContentView.trailingAnchor, constant: -padding),
             collectionView.bottomAnchor.constraint(equalTo: collectionViewContentView.bottomAnchor, constant: -padding)
         ])
-
     }
     
     
@@ -173,6 +172,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         cell.set(newsItem: newsItem)
         return cell
     }
+  
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
@@ -190,36 +190,6 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
-}
-
-
-//MARK: - SearchBar
-extension MainViewController: UISearchBarDelegate, UISearchResultsUpdating {
-
-    func updateSearchResults(for searchController: UISearchController) {
-//        //when searching
-//        print("search tapped")
-//        guard let text = searchController.searchBar.text, !text.isEmpty else { return }
-//        print(text)
-//        //network call here
-//        NetworkManager.shared.searchNews(for: text) { [weak self] result in
-//            guard let self = self else { return }
-//
-//            switch result {
-//            case .success(let response):
-//                self.newsItems.append(contentsOf: response.articles)
-//                DispatchQueue.main.async {
-//                    self.tableView.reloadData()
-//                }
-//            //TODO: handle error
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
-    }
-    
-    
-
 }
 
 

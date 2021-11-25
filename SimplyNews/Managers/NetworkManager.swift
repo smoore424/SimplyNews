@@ -16,7 +16,8 @@ enum CategoryType: String {
     case sports = "&category=sports"
     case technology = "&category=technology"
 }
-    
+
+
 class NetworkManager {
     
     static let shared = NetworkManager()
