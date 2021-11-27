@@ -75,7 +75,7 @@ extension MainViewController {
     
     
     private func setCollectionViewUI() {
-        let padding: CGFloat = 10
+        let padding: CGFloat = 5
         
         collectionViewContentView = UIView(frame: .zero)
         collectionViewContentView.backgroundColor = .systemBackground
@@ -86,14 +86,14 @@ extension MainViewController {
             collectionViewContentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             collectionViewContentView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             collectionViewContentView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            collectionViewContentView.heightAnchor.constraint(equalToConstant: 150)
+            collectionViewContentView.heightAnchor.constraint(equalToConstant: 85)
         ])
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = padding
-        layout.itemSize = CGSize(width: 240, height: 120)
-        layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 0, right: 5)
+        layout.itemSize = CGSize(width: 240, height: 60)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         
         collectionView.dataSource = self
