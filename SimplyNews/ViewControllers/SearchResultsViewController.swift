@@ -61,7 +61,6 @@ class SearchResultsViewController: UIViewController {
             }
         }
     }
-
 }
 
 
@@ -93,7 +92,6 @@ extension SearchResultsViewController: UISearchBarDelegate {
         //perform network call based on search input
         guard let text = searchBar.text, !text.isEmpty else { return }
         searchNews(for: text)
-        
     }
 }
 
