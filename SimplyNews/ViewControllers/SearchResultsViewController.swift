@@ -5,6 +5,7 @@
 //  Created by Stacey Moore on 11/16/21.
 //
 
+import SafariServices
 import UIKit
 
 class SearchResultsViewController: UIViewController {
@@ -75,6 +76,32 @@ extension SearchResultsViewController: UITableViewDelegate, UITableViewDataSourc
         let newsItem = searchResults[indexPath.row]
         cell.set(newsItem: newsItem)
         return cell
+    }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        let url = searchResults[indexPath.row].url
+        
+        if let url = URL(string: url) {
+            let config = SFSafariViewController.Configuration()
+            config.entersReaderIfAvailable = true
+            
+            let vc = SFSafariViewController(url: url, configuration: config)
+            vc.delegate = self
+    
+            present(vc, animated: true)
+        }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+
+//MARK: - SFSafariViewController
+extension SearchResultsViewController: SFSafariViewControllerDelegate {
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        dismiss(animated: true)
     }
 }
 
