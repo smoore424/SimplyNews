@@ -29,7 +29,7 @@ class SNCategoryCellLabel: UILabel {
     private func configure() {
         font = UIFont.preferredFont(forTextStyle: .largeTitle)
         textAlignment = .center
-        textColor = .white
+        textColor = .label
         translatesAutoresizingMaskIntoConstraints = false
     }
 }

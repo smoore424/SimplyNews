@@ -10,9 +10,18 @@ import UIKit
 class CategoryCell: UICollectionViewCell {
     
     static let reuseID = "CategoryCell"
-    
+    //TODO: Remove image view
     let imageView = SNCategoryCellImageView(frame: .zero)
     let label = SNCategoryCellLabel()
+    
+    override var isSelected: Bool {
+        didSet {
+            if !isSelected {
+                backgroundColor = .systemBackground
+            }
+        }
+    }
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -32,9 +41,6 @@ class CategoryCell: UICollectionViewCell {
         layer.cornerRadius = 10
         layer.masksToBounds = true
         label.text = category[indexPath].text
-        
-        imageView.image = category[indexPath].image.withRenderingMode(.alwaysTemplate)
-        imageView.tintColor = category[indexPath].color
     }
     
     
@@ -64,4 +70,5 @@ class CategoryCell: UICollectionViewCell {
             label.heightAnchor.constraint(equalToConstant: 38)
         ])
     }
+    
 }
