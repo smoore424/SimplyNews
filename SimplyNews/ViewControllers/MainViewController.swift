@@ -150,12 +150,16 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) as? CategoryCell {
-
+            
+            
             cell.backgroundColor = categories[indexPath.item].color
+            cell.label.textColor = .white
             let catID = cell.getCategoryID(for: indexPath.item)
             selectedCategory = catID
             newsItems.removeAll()
             getNews(category: selectedCategory)
+            
+            cell.deselectedIndex = indexPath.item
         }
     }
 }

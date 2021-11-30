@@ -14,10 +14,13 @@ class CategoryCell: UICollectionViewCell {
     let imageView = SNCategoryCellImageView(frame: .zero)
     let label = SNCategoryCellLabel()
     
+    var deselectedIndex = 0
+    
     override var isSelected: Bool {
         didSet {
             if !isSelected {
                 backgroundColor = .systemBackground
+                setTextColor(for: deselectedIndex)
             }
         }
     }
@@ -41,6 +44,13 @@ class CategoryCell: UICollectionViewCell {
         layer.cornerRadius = 10
         layer.masksToBounds = true
         label.text = category[indexPath].text
+        setTextColor(for: indexPath)
+    }
+    
+    
+    private func setTextColor(for indexPath: Int) {
+        let category = categories
+        label.textColor = category[indexPath].color
     }
     
     
