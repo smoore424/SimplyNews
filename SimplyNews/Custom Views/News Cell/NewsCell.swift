@@ -10,7 +10,7 @@ import UIKit
 class NewsCell: UITableViewCell {
     
     let newsImageView = SNNewsImageView(frame: .zero)
-    let headlineLabel = SNHeadlineLabel(textAlignment: .left)
+    let headlineLabel = SNHeadlineLabel(textAlignment: .left, textColor: .label)
     let timestampLabel = SNTimestampLabel(textAlignment: .left)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

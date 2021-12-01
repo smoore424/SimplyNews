@@ -8,7 +8,7 @@
 import SafariServices
 import UIKit
 
-class SearchResultsViewController: UIViewController {
+class SearchResultsViewController: SNDataViewController {
     
     var searchResults: [Article] = []
     
@@ -53,6 +53,12 @@ class SearchResultsViewController: UIViewController {
             switch result {
             case .success(let response):
                 self.searchResults.append(contentsOf: response.articles)
+                
+                if self.searchResults.isEmpty {
+                    let message = "Sorry, no stories found for the search term \"\(text)\". \nPlease try another search term"
+                    DispatchQueue.main.async { self.showEmptyStateView(with: message, in: self.view) }
+                }
+                
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }

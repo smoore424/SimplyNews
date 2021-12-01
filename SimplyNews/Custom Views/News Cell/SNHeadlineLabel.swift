@@ -20,9 +20,10 @@ class SNHeadlineLabel: UILabel {
     }
     
     
-    init(textAlignment: NSTextAlignment) {
+    init(textAlignment: NSTextAlignment, textColor: UIColor) {
         super.init(frame: .zero)
         self.textAlignment = textAlignment
+        self.textColor = textColor
         configure()
     }
 
@@ -33,7 +34,6 @@ class SNHeadlineLabel: UILabel {
         lineBreakMode = .byTruncatingTail
         
         font = UIFont.preferredFont(forTextStyle: .title2)
-        textColor = .label
         
         translatesAutoresizingMaskIntoConstraints = false
     }
