@@ -14,13 +14,14 @@ class CategoryCell: UICollectionViewCell {
     let imageView = SNCategoryCellImageView(frame: .zero)
     let label = SNCategoryCellLabel()
     
-    var deselectedIndex = 0
+//    var deselectedIndex = 0
     
     override var isSelected: Bool {
         didSet {
             if !isSelected {
-                backgroundColor = .systemBackground
-                setTextColor(for: deselectedIndex)
+//                backgroundColor = .systemBackground
+//                setTextColor(for: deselectedIndex)
+                print("test")
             }
         }
     }
@@ -37,14 +38,27 @@ class CategoryCell: UICollectionViewCell {
     }
     
     
-    func setCells(for indexPath: Int) {
-        backgroundColor = .systemBackground
+    func setCells(for indexPath: Int, selected: Bool) {
         let category = categories
         layer.borderColor = category[indexPath].color.cgColor
         layer.cornerRadius = 10
         layer.masksToBounds = true
         label.text = category[indexPath].text
-        setTextColor(for: indexPath)
+        
+        if selected {
+            backgroundColor = category[indexPath].color
+            label.textColor = .white
+        } else {
+            backgroundColor = .systemBackground
+            label.textColor = category[indexPath].color
+        }
+//        backgroundColor = .systemBackground
+//        let category = categories
+//        layer.borderColor = category[indexPath].color.cgColor
+//        layer.cornerRadius = 10
+//        layer.masksToBounds = true
+//        label.text = category[indexPath].text
+//        setTextColor(for: indexPath)
     }
     
     
