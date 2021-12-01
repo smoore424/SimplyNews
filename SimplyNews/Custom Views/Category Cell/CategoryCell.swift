@@ -14,19 +14,6 @@ class CategoryCell: UICollectionViewCell {
     let imageView = SNCategoryCellImageView(frame: .zero)
     let label = SNCategoryCellLabel()
     
-//    var deselectedIndex = 0
-    
-    override var isSelected: Bool {
-        didSet {
-            if !isSelected {
-//                backgroundColor = .systemBackground
-//                setTextColor(for: deselectedIndex)
-                print("test")
-            }
-        }
-    }
-    
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -52,19 +39,6 @@ class CategoryCell: UICollectionViewCell {
             backgroundColor = .systemBackground
             label.textColor = category[indexPath].color
         }
-//        backgroundColor = .systemBackground
-//        let category = categories
-//        layer.borderColor = category[indexPath].color.cgColor
-//        layer.cornerRadius = 10
-//        layer.masksToBounds = true
-//        label.text = category[indexPath].text
-//        setTextColor(for: indexPath)
-    }
-    
-    
-    private func setTextColor(for indexPath: Int) {
-        let category = categories
-        label.textColor = category[indexPath].color
     }
     
     
@@ -94,5 +68,4 @@ class CategoryCell: UICollectionViewCell {
             label.heightAnchor.constraint(equalToConstant: 38)
         ])
     }
-    
 }

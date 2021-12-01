@@ -12,13 +12,13 @@ class MainViewController: UIViewController {
     
     var newsItems: [Article] = []
     var selectedCategory: CategoryType = .general
+    var selectedIndexPath: IndexPath = [0, 0]
 
     var collectionViewContentView: UIView!
     var collectionView: UICollectionView!
     
     var tableViewContentView: UIView!
-    var selectedIndexPath: IndexPath = [0, 0]
-    
+
     lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.tableFooterView = UIView()
@@ -36,7 +36,6 @@ class MainViewController: UIViewController {
         setNavigationUI()
         setTableViewUI()
         getNews(category: selectedCategory)
-
     }
     
     
@@ -144,15 +143,10 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.reuseID, for: indexPath) as! CategoryCell
-        
-        //delete this once new methods are written.
-//        cell.setCells(for: indexPath.item)
-        print("selected index is \(selectedIndexPath)")
+
         if indexPath == selectedIndexPath {
-            //method in categorycell file that sets selected cell
             cell.setCells(for: indexPath.item, selected: true)
         } else {
-            //method in categorycell file that sets unselected cell
             cell.setCells(for: indexPath.item, selected: false)
         }
         return cell
@@ -161,17 +155,13 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) as? CategoryCell {
-            print("selected")
-//            cell.backgroundColor = categories[indexPath.item].color
-//            cell.label.textColor = .white
             selectedIndexPath = indexPath
             collectionView.reloadData()
+            
             let catID = cell.getCategoryID(for: indexPath.item)
             selectedCategory = catID
             newsItems.removeAll()
             getNews(category: selectedCategory)
-            
-//            cell.deselectedIndex = indexPath.item
         }
     }
 }
