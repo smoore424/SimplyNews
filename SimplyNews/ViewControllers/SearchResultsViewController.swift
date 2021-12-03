@@ -42,6 +42,7 @@ class SearchResultsViewController: SNDataViewController {
         searchBar.delegate = self
         navigationItem.titleView = searchBar
         searchBar.showsCancelButton = true
+        searchBar.placeholder = "Search for news"
         searchBar.becomeFirstResponder()
     }
     
