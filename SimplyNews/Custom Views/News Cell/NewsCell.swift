@@ -27,19 +27,21 @@ class NewsCell: UITableViewCell {
     }
     
     
-    public func set(newsItem: Article) {
-        //TODO: Adjust to match info needed from API call
-        newsImageView.downloadImage(from: newsItem.urlToImage ?? "")
+    public func set(newsItem: Article, withImage: Bool) {
+
+        if withImage {
+            newsImageView.downloadImage(from: newsItem.urlToImage ?? "")
+        } else {
+            setNoImageConstraints()
+        }
+        
         headlineLabel.text = newsItem.title
         timestampLabel.text = newsItem.publishedAt.convertToDisplayFormat()
-        print(newsItem.title)
-        print(newsItem.publishedAt)
     }
     
     
     func configureNewsImageView() {
         addSubview(newsImageView)
-        
         
         NSLayoutConstraint.activate([
             newsImageView.topAnchor.constraint(equalTo: topAnchor, constant: K.newsCellPadding),
@@ -67,7 +69,21 @@ class NewsCell: UITableViewCell {
             timestampLabel.topAnchor.constraint(equalTo: topAnchor, constant:   K.newsCellPadding),
             timestampLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: K.newsCellPadding),
             timestampLabel.trailingAnchor.constraint(equalTo: newsImageView.leadingAnchor, constant: -K.newsCellPadding),
+            timestampLabel.heightAnchor.constraint(equalToConstant: 16)
+        ])
+    }
+    
+    func setNoImageConstraints() {
+        NSLayoutConstraint.activate([
+            timestampLabel.topAnchor.constraint(equalTo: topAnchor, constant:   K.newsCellPadding),
+            timestampLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: K.newsCellPadding),
+            timestampLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -K.newsCellPadding),
             timestampLabel.heightAnchor.constraint(equalToConstant: 16),
+            
+            headlineLabel.topAnchor.constraint(equalTo: timestampLabel.bottomAnchor, constant: K.newsCellPadding/2),
+            headlineLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: K.newsCellPadding),
+            headlineLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -K.newsCellPadding),
+            headlineLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -K.newsCellPadding)
         ])
     }
 }

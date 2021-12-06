@@ -10,7 +10,6 @@ import UIKit
 class SNNewsImageView: UIImageView {
     
     let cache = NetworkManager.shared.cache
-    let placeholderImage = UIImage(named: "dummy")
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,9 +37,7 @@ class SNNewsImageView: UIImageView {
             self.image = image
         }
         
-        guard let url = URL(string: urlString) else {
-            DispatchQueue.main.async { self.image =  self.placeholderImage }
-            return }
+        guard let url = URL(string: urlString) else { return }
         
         let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
             guard let self = self else { return }

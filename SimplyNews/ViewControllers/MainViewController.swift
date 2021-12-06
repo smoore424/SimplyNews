@@ -177,7 +177,11 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.newsCell) as! NewsCell
         let newsItem = newsItems[indexPath.row]
-        cell.set(newsItem: newsItem)
+        if newsItem.urlToImage != nil {
+            cell.set(newsItem: newsItem, withImage: true)
+        } else {
+            cell.set(newsItem: newsItem, withImage: false)
+        }
         return cell
     }
   
