@@ -1,0 +1,11 @@
+//
+//  Config.xcconfig
+//  SimplyNews
+//
+//  Created by Stacey Moore on 12/28/21.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+API_KEY = f16bdbdfe2944f1f982591999133f53a

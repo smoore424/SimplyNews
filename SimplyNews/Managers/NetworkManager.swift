@@ -21,8 +21,7 @@ enum CategoryType: String {
 class NetworkManager {
     
     static let shared = NetworkManager()
-    
-    //what endpoint should look like with country and category: https://newsapi.org/v2/top-headlines?country=de&category=business&apiKey=f16bdbdfe2944f1f982591999133f53a
+
     private let baseURL = "https://newsapi.org/v2/"
     private let topHeadlines = "top-headlines?"
     private let everything = "everything?"
@@ -30,16 +29,19 @@ class NetworkManager {
     
     private let mostRecent = "&sortBy=publishedAt"
     private let english = "&language=en"
-    //TODO: Protect APIKey before turning public on github
-    private let apiKey = "&apiKey=f16bdbdfe2944f1f982591999133f53a"
-    
+    private let api = "&apiKey="
+ 
     let cache = NSCache<NSString, UIImage>()
     
     private init() {}
     
     func getNews(category: CategoryType, completed: @escaping (Result<SNResponse, SNError>) -> Void) {
         
-        let endpoint = baseURL + topHeadlines + country + category.rawValue + "&pageSize=100" + apiKey
+        guard let apiKey = Bundle.main.infoDictionary?["API_KEY"] as? String else {
+            print("Can't find API Key")
+            return }
+        
+        let endpoint = baseURL + topHeadlines + country + category.rawValue + "&pageSize=100" + api + apiKey
         print(endpoint)
         
         guard let url = URL(string: endpoint) else {
@@ -78,7 +80,10 @@ class NetworkManager {
     
     
     func searchNews(for keyword: String, completed: @escaping (Result<SNResponse, SNError>) -> Void) {
-        let endpoint = baseURL + everything + "q=\(keyword)" + "&pageSize=100" + english + mostRecent + apiKey
+        
+        guard let apiKey = Bundle.main.infoDictionary?["API_KEY"] as? String else { return }
+        
+        let endpoint = baseURL + everything + "q=\(keyword)" + "&pageSize=100" + english + mostRecent + api + apiKey
         print(endpoint)
         
         guard let url = URL(string: endpoint) else {
