@@ -40,7 +40,7 @@ class MainViewController: UIViewController {
     
     
     func getNews(category: CategoryType) {
-        NetworkManager.shared.getNews(category: category) { [weak self] result in
+        NetworkManager.shared.fetchNews(category: category) { [weak self] result in
             guard let self = self else { return }
             
             switch result {
@@ -215,7 +215,7 @@ extension MainViewController: SFSafariViewControllerDelegate {
 /*
  Unable to support pagination at this time due to free API limitations.
  Only allows for a total of 100 responses in a free account
- To perserve API calls, best just to try and get 100 upfront.
+ To perserve API calls, best to try and get 100 upfront.
  */
 //extension MainViewController: UIScrollViewDelegate {
 //    func scrollViewDidScroll(_ scrollView: UIScrollView) {

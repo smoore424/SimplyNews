@@ -35,7 +35,7 @@ class NetworkManager {
     
     private init() {}
     
-    func getNews(category: CategoryType, completed: @escaping (Result<SNResponse, SNError>) -> Void) {
+    func fetchNews(category: CategoryType, completed: @escaping (Result<SNResponse, SNError>) -> Void) {
         
         guard let apiKey = Bundle.main.infoDictionary?["API_KEY"] as? String else {
             print("Can't find API Key")

@@ -119,13 +119,11 @@ extension SearchResultsViewController: SFSafariViewControllerDelegate {
 
 extension SearchResultsViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        print("Cancel clicked")
         navigationController?.popViewController(animated: true)
     }
     
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print("Search Now")
         searchResults = []
         //perform network call based on search input
         guard let text = searchBar.text, !text.isEmpty else { return }
