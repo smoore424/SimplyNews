@@ -19,6 +19,4 @@ Check out what's happening around the world, right in the Simply News app!
 * UITableView and UICollectionView
 * SFSafariViewController
 
-* 
-
 
